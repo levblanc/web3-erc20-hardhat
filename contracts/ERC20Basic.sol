@@ -87,10 +87,18 @@ interface IERC20 {
 }
 
 contract ERC20Basic is IERC20 {
-    string private immutable _name;
-    string private immutable _symbol;
+    /**
+     * @dev Set `decimals` to 18 to imitate the relationship
+     * between Ether and Wei.
+     *
+     * For example, if `decimals` equals `2`, a balance of `505` tokens
+     * should be displayed to a user as `5.05` (`505 / 10 ** 2`)
+     */
+    uint8 public constant decimals = 18;
+    string private constant _name;
+    string private constant _symbol;
+    uint256 private _totalSupply = 10 ether;
 
-    uint256 private _totalSupply;
     mapping(address => uint256) private _balances;
     // { owner : { spender: amount } }
     mapping(address => mapping(address => uint256)) private _allowances;
